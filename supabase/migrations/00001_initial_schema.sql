@@ -1,5 +1,5 @@
 -- ============================================
--- BurnPosse Initial Schema Migration
+-- MakerHelp Initial Schema Migration
 -- ============================================
 
 -- Table: profiles

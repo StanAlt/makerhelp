@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'BurnPosse — Expert Laser Help, Live',
+  title: 'MakerHelp — Expert Laser Help, Live',
   description:
     'Book a live video call with a vetted laser engraving and CNC expert. Get help with LightBurn, xTool, Glowforge, and more.',
 }
