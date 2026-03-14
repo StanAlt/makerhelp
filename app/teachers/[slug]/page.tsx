@@ -89,7 +89,6 @@ export default async function TeacherProfilePage({
     )
   }
 
-  const platformFee = 0.2
   const hourlyRate = teacher.hourly_rate_cents / 100
   const certBadge = CERT_BADGES[teacher.certification_level]
 

@@ -1,6 +1,10 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { type NextRequest, NextResponse } from 'next/server'
 
+const PROTECTED_ROUTES = ['/dashboard', '/book', '/sessions', '/onboarding']
+const AUTH_ROUTES = ['/login', '/signup']
+const ADMIN_ROUTES = ['/admin']
+
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({
     request: {
@@ -44,50 +48,33 @@ export async function updateSession(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname
 
-  // Public routes that don't require auth
-  const publicRoutes = ['/', '/login', '/signup', '/auth/callback', '/teachers']
-  const isPublicRoute =
-    publicRoutes.includes(pathname) ||
-    (pathname.startsWith('/teachers/') && !pathname.endsWith('/edit'))
+  const isProtected = PROTECTED_ROUTES.some((r) => pathname.startsWith(r))
+  const isAuthRoute = AUTH_ROUTES.some((r) => pathname.startsWith(r))
+  const isAdmin = ADMIN_ROUTES.some((r) => pathname.startsWith(r))
 
-  // If not authenticated and trying to access protected route
-  if (!user && !isPublicRoute) {
+  // Redirect unauthenticated users away from protected/admin routes
+  if ((isProtected || isAdmin) && !user) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     url.searchParams.set('redirectTo', pathname)
     return NextResponse.redirect(url)
   }
 
-  // Role-based route protection
-  if (user) {
+  // Redirect authenticated users away from auth routes
+  if (isAuthRoute && user) {
+    return NextResponse.redirect(new URL('/dashboard', request.url))
+  }
+
+  // Admin route protection via DB role check
+  if (isAdmin && user) {
     const { data: profile } = await supabase
       .from('profiles')
       .select('role')
       .eq('id', user.id)
       .single()
 
-    // Admin-only routes
-    if (pathname.startsWith('/admin') && profile?.role !== 'admin') {
+    if (profile?.role !== 'admin') {
       return NextResponse.redirect(new URL('/dashboard', request.url))
-    }
-
-    // Booking requires maker role
-    if (pathname.startsWith('/book') && profile?.role === 'teacher') {
-      return NextResponse.redirect(new URL('/dashboard', request.url))
-    }
-
-    // Teacher profile edit requires ownership
-    if (pathname.match(/^\/teachers\/[^/]+\/edit$/)) {
-      const slug = pathname.split('/')[2]
-      const { data: teacherProfile } = await supabase
-        .from('teacher_profiles')
-        .select('id')
-        .eq('slug', slug)
-        .single()
-
-      if (!teacherProfile || teacherProfile.id !== user.id) {
-        return NextResponse.redirect(new URL('/dashboard', request.url))
-      }
     }
   }
 

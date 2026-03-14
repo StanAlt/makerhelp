@@ -5,9 +5,7 @@ export default async function DashboardPage() {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  if (!user) {
-    redirect('/login')
-  }
+  if (!user) redirect('/login')
 
   const { data: profile } = await supabase
     .from('profiles')
@@ -15,9 +13,8 @@ export default async function DashboardPage() {
     .eq('id', user.id)
     .single()
 
-  if (profile?.role === 'teacher') {
-    redirect('/dashboard/teacher')
-  }
-
+  if (!profile?.role) redirect('/onboarding')
+  if (profile.role === 'teacher') redirect('/dashboard/teacher')
+  if (profile.role === 'admin') redirect('/admin/teachers')
   redirect('/dashboard/maker')
 }

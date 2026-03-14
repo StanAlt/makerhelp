@@ -1,6 +1,6 @@
 'use client'
 
-import { EquipmentData } from '@/lib/actions/teacher-onboarding'
+import { EquipmentEntry } from './TeacherOnboardingForm'
 
 const BRANDS = [
   'xTool',
@@ -31,10 +31,10 @@ const LASER_TYPES = [
 ]
 
 interface EquipmentCardProps {
-  equipment: EquipmentData
+  equipment: EquipmentEntry
   index: number
   canRemove: boolean
-  onChange: (index: number, field: keyof EquipmentData, value: string) => void
+  onChange: (index: number, field: string, value: string) => void
   onRemove: (index: number) => void
 }
 
@@ -100,8 +100,8 @@ export default function EquipmentCard({
             Laser Type <span className="text-red-500">*</span>
           </label>
           <select
-            value={equipment.laser_type}
-            onChange={(e) => onChange(index, 'laser_type', e.target.value)}
+            value={equipment.laserType}
+            onChange={(e) => onChange(index, 'laserType', e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="">Select type...</option>

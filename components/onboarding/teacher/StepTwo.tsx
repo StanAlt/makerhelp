@@ -1,11 +1,11 @@
 'use client'
 
-import { EquipmentData } from '@/lib/actions/teacher-onboarding'
+import { EquipmentEntry } from './TeacherOnboardingForm'
 import EquipmentCard from './EquipmentCard'
 
 interface StepTwoProps {
-  equipment: EquipmentData[]
-  onEquipmentChange: (index: number, field: keyof EquipmentData, value: string) => void
+  equipment: EquipmentEntry[]
+  onEquipmentChange: (index: number, field: string, value: string) => void
   onAddEquipment: () => void
   onRemoveEquipment: (index: number) => void
 }
@@ -28,7 +28,7 @@ export default function StepTwo({
       <div className="space-y-4">
         {equipment.map((eq, index) => (
           <EquipmentCard
-            key={index}
+            key={eq.id}
             equipment={eq}
             index={index}
             canRemove={equipment.length > 1}

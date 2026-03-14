@@ -1,6 +1,6 @@
 'use client'
 
-import { EquipmentData } from '@/lib/actions/teacher-onboarding'
+import { EquipmentEntry } from './TeacherOnboardingForm'
 
 interface StepFourProps {
   fullName: string
@@ -8,7 +8,7 @@ interface StepFourProps {
   bio: string
   hourlyRate: number
   sessionLengths: number[]
-  equipment: EquipmentData[]
+  equipment: EquipmentEntry[]
   specialties: string[]
   confirmed: boolean
   onConfirmChange: (confirmed: boolean) => void
@@ -34,7 +34,7 @@ export default function StepFour({
   onConfirmChange,
 }: StepFourProps) {
   const platformFee = 0.2
-  const teacherEarnings = hourlyRate * (1 - platformFee)
+  const payout = hourlyRate * (1 - platformFee)
 
   return (
     <div className="space-y-6">
@@ -60,23 +60,10 @@ export default function StepFour({
             Pricing
           </h3>
           <p className="text-gray-700">
-            <span className="font-semibold">${hourlyRate}/hr</span>{' '}
-            <span className="text-gray-500">
-              (you earn ${teacherEarnings.toFixed(2)}/hr after 20% platform fee)
-            </span>
+            <span className="font-semibold">${hourlyRate}/hr</span>
+            {' · '}
+            You earn ${(payout / 2).toFixed(2)} for 30 min, ${payout.toFixed(2)} for 60 min
           </p>
-          <div className="mt-1 text-sm text-gray-600">
-            {sessionLengths.sort().map((length) => {
-              const sessionRate = (hourlyRate * length) / 60
-              const sessionEarnings = sessionRate * (1 - platformFee)
-              return (
-                <p key={length}>
-                  {length}-min session: ${sessionRate.toFixed(2)} (you earn $
-                  {sessionEarnings.toFixed(2)})
-                </p>
-              )
-            })}
-          </div>
         </div>
 
         {/* Equipment */}
@@ -85,18 +72,15 @@ export default function StepFour({
             Equipment ({equipment.length} machine{equipment.length !== 1 ? 's' : ''})
           </h3>
           <div className="space-y-2">
-            {equipment.map((eq, i) => (
-              <div key={i} className="text-gray-700">
+            {equipment.map((eq) => (
+              <div key={eq.id} className="text-gray-700">
                 <span className="font-medium">{eq.brand}</span>
                 {eq.model && <span> {eq.model}</span>}
                 <span className="text-gray-500">
-                  {' '}
-                  — {LASER_TYPE_LABELS[eq.laser_type] || eq.laser_type}
-                  {eq.wattage && `, ${eq.wattage}`}
+                  {' · '}
+                  {LASER_TYPE_LABELS[eq.laserType] || eq.laserType}
+                  {eq.wattage && ` · ${eq.wattage}`}
                 </span>
-                {eq.notes && (
-                  <span className="text-gray-400 text-sm"> ({eq.notes})</span>
-                )}
               </div>
             ))}
           </div>
@@ -128,7 +112,7 @@ export default function StepFour({
           className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 mt-0.5"
         />
         <span className="text-sm text-gray-700">
-          I confirm all information is accurate and I own the equipment listed.
+          I confirm all information is accurate and I own the equipment listed above.
         </span>
       </label>
     </div>
