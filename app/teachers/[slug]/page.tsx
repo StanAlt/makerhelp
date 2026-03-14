@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 import type { Metadata } from 'next'
 
 const LASER_TYPE_LABELS: Record<string, string> = {
@@ -237,12 +238,22 @@ export default async function TeacherProfilePage({
           )}
 
           {/* Book Button */}
-          <button
-            disabled
-            className="w-full py-3 bg-blue-600 text-white rounded-lg font-medium opacity-50 cursor-not-allowed"
-          >
-            Book a Session — Coming Soon
-          </button>
+          {!isOwner && teacher.stripe_onboarding_complete && (
+            <Link
+              href={`/book/${teacher.id}`}
+              className="block w-full py-3 bg-blue-600 text-white text-center rounded-lg hover:bg-blue-700 font-medium"
+            >
+              Book a Session
+            </Link>
+          )}
+          {!isOwner && !teacher.stripe_onboarding_complete && (
+            <button
+              disabled
+              className="w-full py-3 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed"
+            >
+              Payment Setup Pending &mdash; Check Back Soon
+            </button>
+          )}
         </div>
       </div>
     </main>

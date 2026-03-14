@@ -32,3 +32,13 @@ export async function createUniqueSlug(
 
   return `${base}-${Date.now()}`
 }
+
+export function generateSettingsSlug(
+  brand: string,
+  model: string | null,
+  material: string,
+  operation: string
+): string {
+  const parts = [brand, model, material, operation].filter(Boolean).join(' ')
+  return generateSlug(parts) + '-' + Date.now().toString(36)
+}
