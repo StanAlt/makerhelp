@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your MakerHelp Login Link</title>
+</head>
+<body style="margin:0;padding:0;background-color:#0D1710;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#0D1710;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="480" cellpadding="0" cellspacing="0" style="max-width:480px;width:100%;">
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding-bottom:32px;">
+              <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 36V8l14 18" stroke="#F5F0E8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M36 36V8L22 26" stroke="#FF4D1A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="22" cy="8" r="2.5" fill="#FF4D1A"/>
+              </svg>
+              <div style="margin-top:8px;font-size:24px;letter-spacing:-0.5px;">
+                <span style="color:#F5F0E8;font-weight:500;">Maker</span><span style="color:#FF4D1A;font-style:italic;font-weight:500;">Help</span>
+              </div>
+            </td>
+          </tr>
+          <!-- Card -->
+          <tr>
+            <td style="background-color:#1B3D2A;border-radius:8px;padding:40px 32px;">
+              <h1 style="margin:0 0 16px;font-size:22px;font-weight:600;color:#F5F0E8;">
+                Your Login Link
+              </h1>
+              <p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:#A8B5AC;">
+                Click the button below to sign in to your MakerHelp account:
+              </p>
+              <!-- CTA Button -->
+              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 24px;">
+                <tr>
+                  <td style="background-color:#FF4D1A;border-radius:4px;">
+                    <a href="{{ .ConfirmationURL }}" target="_blank" style="display:inline-block;padding:12px 32px;font-size:15px;font-weight:600;color:#F5F0E8;text-decoration:none;">
+                      Sign In to MakerHelp
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin:0;font-size:13px;line-height:1.5;color:#6B7C72;">
+                If the button doesn't work, copy and paste this link into your browser:<br>
+                <a href="{{ .ConfirmationURL }}" style="color:#FF4D1A;word-break:break-all;">{{ .ConfirmationURL }}</a>
+              </p>
+              <p style="margin:16px 0 0;font-size:13px;color:#6B7C72;">
+                This link expires in 1 hour and can only be used once.
+              </p>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding-top:24px;">
+              <p style="margin:0;font-size:12px;color:#6B7C72;">
+                You're receiving this because someone requested a login link for this email on MakerHelp.<br>
+                If you didn't request this, you can safely ignore this email.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
