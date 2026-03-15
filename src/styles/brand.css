@@ -1,0 +1,238 @@
+/* ─────────────────────────────────────────────────────
+   MakerHelp Brand Tokens
+   Import this in src/app/layout.tsx:
+     import '@/styles/brand.css'
+   ───────────────────────────────────────────────────── */
+
+:root {
+  /* Core palette */
+  --ember:        #FF4D1A;
+  --ember-light:  #FF7A4D;
+  --ember-dark:   #CC3600;
+
+  --amber:        #E8900A;
+  --amber-light:  #F5B030;
+
+  --forest:       #1B3D2A;
+  --forest-mid:   #2A5C3F;
+  --forest-light: #3D7A57;
+
+  --charcoal:     #0D1710;
+  --midnight:     #060D09;
+  --steel:        #3A4F44;
+  --sage:         #7BA893;
+
+  --ivory:        #F5F0E8;
+  --ivory-dim:    #E3DDD4;
+  --white:        #FDFCFB;
+
+  /* Semantic aliases */
+  --color-bg-page:      var(--charcoal);
+  --color-bg-surface:   var(--forest);
+  --color-bg-card:      var(--charcoal);
+  --color-bg-deep:      var(--midnight);
+
+  --color-text-primary:   var(--ivory);
+  --color-text-secondary: var(--sage);
+  --color-text-muted:     var(--steel);
+  --color-text-accent:    var(--ember);
+
+  --color-border:         var(--steel);
+  --color-border-subtle:  rgba(58, 79, 68, 0.5);
+
+  --color-action:         var(--ember);
+  --color-action-hover:   var(--ember-dark);
+
+  --color-rating:         var(--amber);
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-ui:      'Outfit', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Spacing (base-4 scale) */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* Radii */
+  --radius-sm:  2px;
+  --radius-md:  4px;
+  --radius-lg:  8px;
+  --radius-xl:  12px;
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast:   150ms;
+  --duration-base:   200ms;
+  --duration-slow:   400ms;
+}
+
+/* ── Base resets ── */
+body {
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Utility classes ── */
+.font-display { font-family: var(--font-display); }
+.font-mono    { font-family: var(--font-mono); }
+
+/* Wordmark span utility */
+.text-ember-italic {
+  color: var(--ember);
+  font-style: italic;
+}
+
+/* ── Component base styles ── */
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard),
+              color var(--duration-base) var(--ease-standard);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-sm { padding: 8px 16px; font-size: 13px; }
+
+.btn-primary {
+  background: var(--ember);
+  color: #fff;
+  border-color: var(--ember);
+}
+.btn-primary:hover {
+  background: var(--ember-dark);
+  border-color: var(--ember-dark);
+}
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ivory);
+  border-color: var(--sage);
+}
+.btn-secondary:hover {
+  border-color: var(--ivory);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--sage);
+  border-color: transparent;
+}
+.btn-ghost:hover {
+  color: var(--ivory);
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.badge-expert {
+  background: rgba(255, 77, 26, 0.15);
+  color: var(--ember);
+  border: 1px solid rgba(255, 77, 26, 0.25);
+}
+
+.badge-vetted {
+  background: rgba(27, 61, 42, 0.6);
+  color: var(--sage);
+  border: 1px solid var(--steel);
+}
+
+.badge-new {
+  background: rgba(232, 144, 10, 0.15);
+  color: var(--amber);
+  border: 1px solid rgba(232, 144, 10, 0.25);
+}
+
+.badge-live {
+  background: rgba(255, 77, 26, 0.08);
+  color: var(--ember);
+  border: 1px solid rgba(255, 77, 26, 0.2);
+}
+.badge-live::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ember);
+  animation: pulse-dot 1.4s ease infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* Card */
+.card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--steel);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+.card-accent-top::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--ember);
+}
+
+/* Input */
+.input {
+  background: var(--charcoal);
+  border: 1px solid var(--steel);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  color: var(--ivory);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+  transition: border-color var(--duration-base) var(--ease-standard);
+}
+.input::placeholder {
+  color: var(--sage);
+  opacity: 0.7;
+}
+.input:focus {
+  border-color: var(--ember);
+}
