@@ -1,6 +1,33 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import '@/styles/brand.css'
 import './globals.css'
+import Nav from '@/components/ui/Nav'
+
+/*
+  Font loading — Google Fonts via next/font/google.
+  Uncomment the block below when building with network access:
+
+  import { Cormorant_Garamond, Outfit, JetBrains_Mono } from 'next/font/google'
+
+  const cormorant = Cormorant_Garamond({
+    subsets: ['latin'], weight: ['500'], style: ['normal', 'italic'],
+    variable: '--font-cormorant', display: 'swap',
+  })
+  const outfit = Outfit({
+    subsets: ['latin'], weight: ['300', '400', '500', '700'],
+    variable: '--font-outfit', display: 'swap',
+  })
+  const jetbrains = JetBrains_Mono({
+    subsets: ['latin'], weight: ['400', '500'],
+    variable: '--font-jetbrains', display: 'swap',
+  })
+
+  Then add to <html>:
+    className={`${cormorant.variable} ${outfit.variable} ${jetbrains.variable}`}
+
+  The CSS variables --font-cormorant, --font-outfit, --font-jetbrains are
+  defined with fallback stacks in styles/brand.css for offline builds.
+*/
 
 export const metadata: Metadata = {
   title: 'MakerHelp — Expert Laser Help, Live',
@@ -15,25 +42,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased">
-        <nav className="border-b border-gray-200 bg-white">
-          <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-            <Link href="/" className="font-bold text-lg">
-              MakerHelp
-            </Link>
-            <div className="flex items-center gap-6 text-sm">
-              <Link href="/teachers" className="text-gray-600 hover:text-gray-900">
-                Find an Expert
-              </Link>
-              <Link href="/settings" className="text-gray-600 hover:text-gray-900">
-                Settings Database
-              </Link>
-              <Link href="/dashboard" className="text-gray-600 hover:text-gray-900">
-                Dashboard
-              </Link>
-            </div>
-          </div>
-        </nav>
+      <body className="font-ui antialiased bg-charcoal text-ivory">
+        <Nav />
         {children}
       </body>
     </html>

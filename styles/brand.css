@@ -1,0 +1,32 @@
+:root {
+  /* Font stacks — overridden by next/font/google CSS variables when available */
+  --font-cormorant: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-outfit: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-jetbrains: 'JetBrains Mono', Consolas, Monaco, monospace;
+
+  /* Primary */
+  --ember: #FF4D1A;
+  --ember-light: #FF7A4D;
+  --ember-dark: #CC3600;
+
+  /* Surfaces */
+  --forest: #1B3D2A;
+  --forest-mid: #2A5C3F;
+  --forest-light: #3D7A57;
+  --charcoal: #0D1710;
+  --midnight: #060D09;
+
+  /* Neutral */
+  --steel: #3A4F44;
+  --sage: #7BA893;
+  --ivory: #F5F0E8;
+  --ivory-dim: #E3DDD4;
+
+  /* Accent */
+  --amber: #E8900A;
+  --amber-light: #F5B030;
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
